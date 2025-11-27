@@ -22,27 +22,33 @@ body {
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* === PHONE MOCKUP === */
+/* === PHONE MOCKUP AMÉLIORÉ (iPhone 15 Style) === */
 .phone-mockup {
-  border: 12px solid #202020;
-  border-radius: 45px;
+  /* Bordure Titane */
+  border: 8px solid #333;
+  border-radius: 56px; /* Plus arrondi pour suivre l'écran */
   overflow: hidden;
   position: relative;
   background: #000;
-  box-shadow: 0 40px 80px -20px rgba(0, 255, 148, 0.15);
+  /* Ombre profonde réaliste */
+  box-shadow: 0 0 0 2px #111,
+    /* Contour noir interne */ 0 30px 60px -10px rgba(0, 0, 0, 0.8),
+    /* Ombre portée */ 0 0 50px rgba(0, 255, 148, 0.05); /* Lueur verte très subtile */
   transform: rotate(-2deg);
 }
-.notch {
+
+/* Dynamic Island */
+.dynamic-island {
   position: absolute;
-  top: 0;
+  top: 12px;
   left: 50%;
   transform: translateX(-50%);
   width: 100px;
-  height: 24px;
-  background: #202020;
-  border-bottom-left-radius: 16px;
-  border-bottom-right-radius: 16px;
-  z-index: 30;
+  height: 30px;
+  background: #000;
+  border-radius: 20px;
+  z-index: 50;
+  transition: all 0.3s ease;
 }
 
 /* === HABIT SWITCHER BUTTONS === */
