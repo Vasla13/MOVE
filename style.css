@@ -45,11 +45,24 @@ body {
   z-index: 30;
 }
 
-/* === HABIT SWITCHER BUTTONS === */
+/* === HABIT SWITCHER BUTTONS (CSS Ajusté) === */
+.habit-btn {
+  /* Style par défaut pour les boutons inactifs */
+  color: #666;
+}
 .habit-btn.active {
   background-color: rgba(255, 255, 255, 0.1);
   color: var(--brand-green);
-  transform: scale(1.1);
+  transform: scale(1.05);
+  border-color: rgba(0, 255, 148, 0.3);
+}
+/* On cache la scrollbar tout en permettant le scroll */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 /* === ANIMATIONS === */

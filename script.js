@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // --- 2. LOGIQUE TÉLÉPHONE ---
+  // --- 2. LOGIQUE TÉLÉPHONE & SWITCHER ---
   const successScreen = document.getElementById("successMessage");
   const taskIcon = document.getElementById("taskIcon");
   const taskTitle = document.getElementById("taskTitle");
@@ -32,17 +32,37 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   window.switchHabit = function (habitKey, btnElement) {
+    // Reset l'apparence de tous les boutons
     document.querySelectorAll(".habit-btn").forEach((b) => {
-      b.classList.remove("active", "text-brand-green");
-      b.classList.add("text-gray-400");
+      // Retire la classe 'active'
+      b.classList.remove("active");
+      // Réinitialise les couleurs des icônes
+      const icon = b.querySelector("i");
+      if (icon) {
+        icon.className = icon.className.replace(
+          "text-brand-green",
+          "text-gray-500"
+        );
+        if (!icon.className.includes("text-gray-500"))
+          icon.classList.add("text-gray-500");
+      }
     });
-    btnElement.classList.add("active", "text-brand-green");
-    btnElement.classList.remove("text-gray-400");
+
+    // Active le bouton cliqué
+    btnElement.classList.add("active");
+    const activeIcon = btnElement.querySelector("i");
+    if (activeIcon) {
+      activeIcon.classList.remove("text-gray-500");
+      activeIcon.classList.add("text-brand-green");
+    }
+
+    // Met à jour l'écran
     successScreen.classList.add("hidden");
     const data = habits[habitKey];
     taskTitle.innerText = data.title;
     taskSub.innerText = data.sub;
     taskIcon.className = `ph-fill ${data.icon} text-2xl text-white`;
+
     const card = document.getElementById("taskCard");
     card.classList.remove("fadeIn");
     void card.offsetWidth;
@@ -194,8 +214,6 @@ document.addEventListener("DOMContentLoaded", () => {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       const originalText = submitBtn.innerHTML;
-
-      // PAS DE CONFETTIS ICI
 
       submitBtn.innerHTML = "Simulation en cours...";
       submitBtn.classList.add("opacity-75");
