@@ -1,6 +1,64 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // 1. TÉLÉPHONE & CONFETTIS
+  // ============================================
+  // 0. PARALLAX EFFECT (NOUVEAU)
+  // ============================================
+  document.addEventListener("mousemove", (e) => {
+    const layers = document.querySelectorAll(".parallax-layer");
+    const x = (window.innerWidth - e.pageX * 2) / 100;
+    const y = (window.innerHeight - e.pageY * 2) / 100;
+
+    layers.forEach((layer) => {
+      const speed = layer.getAttribute("data-speed") || 1;
+      const xOffset = x * speed;
+      const yOffset = y * speed;
+      layer.style.transform = `translateX(${xOffset}px) translateY(${yOffset}px)`;
+    });
+  });
+
+  // ============================================
+  // 1. TÉLÉPHONE & HABIT SWITCHER (AMÉLIORÉ)
+  // ============================================
   const successScreen = document.getElementById("successMessage");
+  const taskIcon = document.getElementById("taskIcon");
+  const taskTitle = document.getElementById("taskTitle");
+  const taskSub = document.getElementById("taskSub");
+
+  // Dictionnaire des habitudes
+  const habits = {
+    run: { title: "Running", icon: "ph-sneaker-move", sub: "30 min / Zone 2" },
+    book: { title: "Lecture", icon: "ph-book-open", sub: "20 pages mini" },
+    detox: { title: "Détox", icon: "ph-prohibit", sub: "Pas de TikTok" },
+    sleep: { title: "Sommeil", icon: "ph-moon-stars", sub: "Couché 23h00" },
+  };
+
+  window.switchHabit = function (habitKey, btnElement) {
+    // Reset boutons
+    document.querySelectorAll(".habit-btn").forEach((b) => {
+      b.classList.remove("active", "text-brand-green");
+      b.classList.add("text-gray-400");
+    });
+    // Active bouton actuel
+    btnElement.classList.add("active", "text-brand-green");
+    btnElement.classList.remove("text-gray-400");
+
+    // Reset écran phone si déjà validé
+    successScreen.classList.add("hidden");
+
+    // Mise à jour contenu
+    const data = habits[habitKey];
+    taskTitle.innerText = data.title;
+    taskSub.innerText = data.sub;
+
+    // Petite anim sur l'icône
+    taskIcon.className = `ph-fill ${data.icon} text-2xl text-white`;
+
+    // Reset animation
+    const card = document.getElementById("taskCard");
+    card.classList.remove("fadeIn");
+    void card.offsetWidth; // trigger reflow
+    card.classList.add("fadeIn");
+  };
+
   window.triggerSuccess = function () {
     successScreen.classList.remove("hidden");
     confetti({
@@ -14,7 +72,9 @@ document.addEventListener("DOMContentLoaded", () => {
     successScreen.classList.add("hidden");
   };
 
-  // 2. CALCULATEUR AMÉLIORÉ
+  // ============================================
+  // 2. CALCULATEUR
+  // ============================================
   const slider = document.getElementById("betSlider");
   const betDisplay = document.getElementById("betDisplay");
   const lossDisplay = document.getElementById("lossDisplay");
@@ -37,22 +97,22 @@ document.addEventListener("DOMContentLoaded", () => {
     slider.addEventListener("input", (e) => {
       const val = e.target.value;
       const monthlyLoss = val * 30;
-
       betDisplay.innerText = val + "€";
       lossDisplay.innerText = "-" + monthlyLoss + "€";
-
       const equiv = getEquivalent(monthlyLoss);
       lossEquivalent.innerHTML = `<span class="text-xl">${equiv.icon}</span> <span>${equiv.text}</span>`;
-
       lossDisplay.style.transform = "scale(1.1)";
       setTimeout(() => (lossDisplay.style.transform = "scale(1)"), 100);
     });
+    // Init
     const initialLoss = slider.value * 30;
     const initialEquiv = getEquivalent(initialLoss);
     lossEquivalent.innerHTML = `<span class="text-xl">${initialEquiv.icon}</span> <span>${initialEquiv.text}</span>`;
   }
 
+  // ============================================
   // 3. WALL OF SHAME
+  // ============================================
   const shameContainer = document.getElementById("shameContainer");
   const shameData = [
     { name: "Maxime", loss: "-10€", excuse: "J'avais plus de batterie..." },
@@ -75,13 +135,15 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
         `;
   }
+  if (shameContainer) {
+    shameContainer.innerHTML = [...shameData, ...shameData]
+      .map((item) => createShameCard(item))
+      .join("");
+  }
 
-  const shameHTML = [...shameData, ...shameData]
-    .map((item) => createShameCard(item))
-    .join("");
-  if (shameContainer) shameContainer.innerHTML = shameHTML;
-
+  // ============================================
   // 4. MODAL
+  // ============================================
   const modal = document.getElementById("modal");
   const openBtns = document.querySelectorAll(".open-modal-btn");
   const closeBtn = document.getElementById("closeModalBtn");
@@ -112,7 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
         origin: { y: 0.6 },
         colors: ["#00FF94", "#ffffff"],
       });
-      submitBtn.innerHTML = "Validation...";
+      submitBtn.innerHTML = "Pacte Scellé...";
       submitBtn.classList.add("opacity-75");
       setTimeout(() => {
         alert("🔥 Bienvenue dans la meute MOVE.");
@@ -124,22 +186,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ============================================
-  // 5. ANIMATION SCROLL (INTERSECTION OBSERVER)
-  // ============================================
+  // 5. SCROLL ANIMATION
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("active");
-        }
+        if (entry.isIntersecting) entry.target.classList.add("active");
       });
     },
-    {
-      threshold: 0.1, // Déclenche quand 10% de l'élément est visible
-    }
+    { threshold: 0.1 }
   );
-
-  // Observer tous les éléments avec la classe .reveal
   document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
 });

@@ -5,6 +5,11 @@
 }
 body { background-color: #050505; color: white; overflow-x: hidden; }
 
+/* === FONTS === */
+.font-signature {
+    font-family: 'Caveat', cursive;
+}
+
 /* === UTILS === */
 .glass {
     background: rgba(5, 5, 5, 0.7);
@@ -36,7 +41,14 @@ body { background-color: #050505; color: white; overflow-x: hidden; }
     z-index: 30;
 }
 
-/* === ANIMATIONS DE BASES (Pop, Marquee, etc) === */
+/* === HABIT SWITCHER BUTTONS === */
+.habit-btn.active {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--brand-green);
+    transform: scale(1.1);
+}
+
+/* === ANIMATIONS === */
 @keyframes pop {
     0% { transform: scale(0.8); opacity: 0; }
     50% { transform: scale(1.1); }
@@ -60,43 +72,28 @@ body { background-color: #050505; color: white; overflow-x: hidden; }
 }
 .animate-pulse-slow { animation: pulseSlow 3s infinite; }
 
-
-/* === NOUVELLES ANIMATIONS (Load & Scroll) === */
-
-/* 1. Animation d'entrée au chargement (Fade In Up) */
 @keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
-
 .animate-on-load {
-    opacity: 0; /* Caché au départ */
+    opacity: 0;
     animation: fadeInUp 0.8s cubic-bezier(0.5, 0, 0, 1) forwards;
 }
 
-/* 2. Animation au Scroll (Reveal) */
 .reveal {
     opacity: 0;
     transform: translateY(30px);
     transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
 }
-
 .reveal.active {
     opacity: 1;
     transform: translateY(0);
 }
 
-/* Délais pour l'effet cascade */
 .delay-100 { transition-delay: 0.1s; }
 .delay-200 { transition-delay: 0.2s; }
 .delay-300 { transition-delay: 0.3s; }
-
 
 /* === SLIDER === */
 input[type=range] { -webkit-appearance: none; background: transparent; cursor: grab; }
@@ -112,9 +109,4 @@ input[type=range]::-webkit-slider-thumb {
     transition: transform 0.1s;
 }
 input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.2); }
-input[type=range]::-webkit-slider-runnable-track {
-    width: 100%;
-    height: 4px;
-    background: #333;
-    border-radius: 2px;
-}
+input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 4px; background: #333; border-radius: 2px; }
