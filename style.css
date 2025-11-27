@@ -1,112 +1,164 @@
 /* === BASE === */
 :root {
-    --brand-green: #00FF94;
-    --brand-red: #FF4D4D;
+  --brand-green: #00ff94;
+  --brand-red: #ff4d4d;
 }
-body { background-color: #050505; color: white; overflow-x: hidden; }
+body {
+  background-color: #050505;
+  color: white;
+  overflow-x: hidden;
+}
 
 /* === FONTS === */
 .font-signature {
-    font-family: 'Caveat', cursive;
+  font-family: "Caveat", cursive;
 }
 
 /* === UTILS === */
 .glass {
-    background: rgba(5, 5, 5, 0.7);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(5, 5, 5, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 /* === PHONE MOCKUP === */
 .phone-mockup {
-    border: 12px solid #202020;
-    border-radius: 45px;
-    overflow: hidden;
-    position: relative;
-    background: #000;
-    box-shadow: 0 40px 80px -20px rgba(0, 255, 148, 0.15);
-    transform: rotate(-2deg);
+  border: 12px solid #202020;
+  border-radius: 45px;
+  overflow: hidden;
+  position: relative;
+  background: #000;
+  box-shadow: 0 40px 80px -20px rgba(0, 255, 148, 0.15);
+  transform: rotate(-2deg);
 }
 .notch {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100px;
-    height: 24px;
-    background: #202020;
-    border-bottom-left-radius: 16px;
-    border-bottom-right-radius: 16px;
-    z-index: 30;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 24px;
+  background: #202020;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  z-index: 30;
 }
 
 /* === HABIT SWITCHER BUTTONS === */
 .habit-btn.active {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: var(--brand-green);
-    transform: scale(1.1);
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--brand-green);
+  transform: scale(1.1);
 }
 
 /* === ANIMATIONS === */
 @keyframes pop {
-    0% { transform: scale(0.8); opacity: 0; }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); opacity: 1; }
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
-.animation-pop { animation: pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+.animation-pop {
+  animation: pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
 
 @keyframes scroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 .animate-scroll {
-    display: flex;
-    animation: scroll 40s linear infinite;
+  display: flex;
+  animation: scroll 40s linear infinite;
 }
-.animate-scroll:hover { animation-play-state: paused; }
+.animate-scroll:hover {
+  animation-play-state: paused;
+}
 
 @keyframes pulseSlow {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.7; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
 }
-.animate-pulse-slow { animation: pulseSlow 3s infinite; }
+.animate-pulse-slow {
+  animation: pulseSlow 3s infinite;
+}
 
 @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 .animate-on-load {
-    opacity: 0;
-    animation: fadeInUp 0.8s cubic-bezier(0.5, 0, 0, 1) forwards;
+  opacity: 0;
+  animation: fadeInUp 0.8s cubic-bezier(0.5, 0, 0, 1) forwards;
 }
 
 .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
 }
 .reveal.active {
-    opacity: 1;
-    transform: translateY(0);
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.delay-100 { transition-delay: 0.1s; }
-.delay-200 { transition-delay: 0.2s; }
-.delay-300 { transition-delay: 0.3s; }
+.delay-100 {
+  transition-delay: 0.1s;
+}
+.delay-200 {
+  transition-delay: 0.2s;
+}
+.delay-300 {
+  transition-delay: 0.3s;
+}
 
 /* === SLIDER === */
-input[type=range] { -webkit-appearance: none; background: transparent; cursor: grab; }
-input[type=range]:active { cursor: grabbing; }
-input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    height: 24px;
-    width: 24px;
-    border-radius: 50%;
-    background: var(--brand-green);
-    margin-top: -10px;
-    box-shadow: 0 0 15px rgba(0, 255, 148, 0.5);
-    transition: transform 0.1s;
+input[type="range"] {
+  -webkit-appearance: none;
+  background: transparent;
+  cursor: grab;
 }
-input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.2); }
-input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 4px; background: #333; border-radius: 2px; }
+input[type="range"]:active {
+  cursor: grabbing;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  background: var(--brand-green);
+  margin-top: -10px;
+  box-shadow: 0 0 15px rgba(0, 255, 148, 0.5);
+  transition: transform 0.1s;
+}
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+input[type="range"]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 4px;
+  background: #333;
+  border-radius: 2px;
+}
