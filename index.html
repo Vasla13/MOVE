@@ -3,155 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MOVE — Arrête de négocier avec toi-même</title>
-    <meta name="description" content="L'application de motivation par l'enjeu financier.">
+    <title>MOVE — L'app de discipline financière</title>
     
-    <!-- Lien vers ton fichier CSS externe -->
     <link rel="stylesheet" href="style.css">
-
-    <!-- Tailwind CSS (Pour le design utilitaire) -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Phosphor Icons (Icônes Pro) -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-
-    <!-- Config des couleurs Tailwind (Spécifique au thème) -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        display: ['Space Grotesk', 'sans-serif'],
-                    },
+                    fontFamily: { sans: ['Inter'], display: ['Space Grotesk'] },
                     colors: {
                         brand: {
-                            black: '#0A0A0A',
-                            dark: '#121212',
-                            card: '#1E1E1E',
-                            green: '#00E055',
-                            red: '#FF2E2E',
-                            gray: '#888888'
+                            black: '#050505', // Noir plus profond
+                            card: '#121212',
+                            green: '#00FF94', // Vert plus "électrique"
+                            red: '#FF4D4D',
                         }
                     },
-                    animation: {
-                        'float': 'float 6s ease-in-out infinite',
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
                     }
                 }
             }
         }
     </script>
 </head>
-<body class="antialiased selection:bg-brand-green selection:text-black">
+<body class="bg-brand-black text-white antialiased selection:bg-brand-green selection:text-black">
 
-    <!-- NAVIGATION -->
-    <nav class="fixed w-full z-50 top-0 glass border-b border-white/5">
+    <!-- GRAIN OVERLAY (Effet texture cinéma) -->
+    <div class="fixed inset-0 pointer-events-none opacity-[0.03] mix-blend-overlay z-[100]" style="background-image: url('https://grainy-gradients.vercel.app/noise.svg');"></div>
+
+    <!-- NAV -->
+    <nav class="fixed w-full z-50 top-0 glass border-b border-white/5 transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
-            <a href="#" class="text-2xl font-display font-bold tracking-tighter flex items-center gap-2">
-                <div class="w-3 h-3 bg-brand-green rounded-full"></div>
+            <a href="#" class="text-2xl font-display font-bold tracking-tighter flex items-center gap-2 group">
+                <div class="w-3 h-3 bg-brand-green rounded-full shadow-[0_0_10px_#00FF94] group-hover:scale-125 transition"></div>
                 MOVE.
             </a>
-
             <div class="hidden md:flex gap-8 text-sm font-medium text-gray-400">
-                <a href="#concept" class="hover:text-white transition">Le Concept</a>
-                <a href="#demo" class="hover:text-white transition">Démonstration</a>
-                <a href="#regles" class="hover:text-white transition">Règles</a>
-                <a href="#faq" class="hover:text-white transition">FAQ</a>
+                <a href="#demo" class="hover:text-white transition">Demo</a>
+                <a href="#features" class="hover:text-white transition">Concept</a>
+                <a href="#calculator" class="hover:text-white transition">Simulateur</a>
             </div>
-
-            <button id="navCta" class="bg-white text-black px-6 py-2.5 rounded-full font-bold text-sm hover:bg-gray-200 transition transform hover:scale-105">
-                Rejoindre la Bêta
+            <button class="open-modal-btn bg-white text-black px-6 py-2.5 rounded-full font-bold text-sm hover:scale-105 transition hover:shadow-[0_0_20px_rgba(255,255,255,0.3)]">
+                Bêta Access
             </button>
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
+    <!-- HERO + INTERACTIVE DEMO -->
     <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
-        <div class="absolute top-0 left-1/4 w-96 h-96 bg-brand-green/20 rounded-full blur-[128px] pointer-events-none"></div>
-        <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-[128px] pointer-events-none"></div>
+        <!-- Glow effects -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-brand-green/10 rounded-full blur-[120px] pointer-events-none"></div>
 
         <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
             
-            <div class="z-10">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-xs font-medium text-brand-green mb-8">
-                    <span class="animate-pulse">●</span> Places limitées pour la V1
+            <div class="z-10 relative">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-brand-green/20 bg-brand-green/5 text-xs font-bold text-brand-green mb-8 uppercase tracking-wider">
+                    <span class="relative flex h-2 w-2">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-green opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-green"></span>
+                    </span>
+                    Live Demo Disponible
                 </div>
                 
-                <h1 class="text-5xl lg:text-7xl font-display font-bold leading-[1.1] mb-8">
-                    Ta discipline a un prix. <br>
-                    <span class="text-gray-500">Paye tes échecs.</span>
+                <h1 class="text-6xl lg:text-8xl font-display font-bold leading-[0.95] mb-8 tracking-tight">
+                    PAYE TES <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-gray-500 to-white">EXCUSES.</span>
                 </h1>
                 
                 <p class="text-xl text-gray-400 leading-relaxed mb-10 max-w-lg">
-                    La motivation ne dure pas. L'aversion à la perte, si.
-                    Engage une somme. Valide ton habitude. Si tu rates, 
-                    <span class="text-white border-b border-brand-green">tu perds ton argent.</span>
+                    Ton cerveau déteste perdre de l'argent. MOVE utilise ce biais psychologique pour te forcer à la discipline.
                 </p>
 
                 <div class="flex flex-col sm:flex-row gap-4">
-                    <button class="open-modal-btn bg-brand-green text-black px-8 py-4 rounded-full font-bold text-lg hover:bg-green-400 transition flex items-center justify-center gap-2">
+                    <button class="open-modal-btn bg-brand-green text-black px-8 py-4 rounded-full font-bold text-lg hover:bg-[#33ffac] transition flex items-center justify-center gap-2 shadow-[0_0_30px_rgba(0,255,148,0.2)]">
                         Je m'engage (5€)
-                        <i class="ph-bold ph-arrow-right"></i>
                     </button>
-                    <a href="#concept" class="px-8 py-4 rounded-full font-medium text-white border border-white/20 hover:bg-white/5 transition flex items-center justify-center">
-                        Comment ça marche ?
-                    </a>
+                    <p class="text-xs text-gray-500 flex items-center px-4">
+                        <i class="ph-fill ph-info mr-1"></i> Essaie le téléphone à droite ➔
+                    </p>
                 </div>
-                
-                <p class="mt-6 text-xs text-gray-500 flex items-center gap-1">
-                    <i class="ph-fill ph-shield-check text-gray-400"></i>
-                    Paiements sécurisés par Stripe. Aucun débit si succès.
-                </p>
             </div>
 
-            <!-- Phone Mockup -->
-            <div id="demo" class="relative z-10 lg:h-[600px] flex justify-center items-center animate-float">
-                <div class="phone-mockup w-[300px] h-[600px] bg-brand-dark flex flex-col relative">
+            <!-- INTERACTIVE PHONE MOCKUP -->
+            <div id="demo" class="relative z-10 lg:h-[700px] flex justify-center items-center">
+                <!-- Phone Container -->
+                <div class="phone-mockup w-[320px] h-[650px] bg-black flex flex-col relative transition-transform duration-500 hover:scale-[1.02]">
                     <div class="notch"></div>
                     
-                    <div class="mt-12 px-6 flex justify-between items-center mb-8">
-                        <div>
-                            <p class="text-xs text-gray-500 uppercase tracking-wide">Lundi 27 Nov</p>
-                            <h3 class="text-xl font-bold">Bonjour, Thomas</h3>
-                        </div>
-                        <div class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-xs">TP</div>
-                    </div>
-
-                    <div class="mx-4 bg-brand-card p-6 rounded-3xl border border-white/5 shadow-2xl relative overflow-hidden group">
-                        <div class="absolute top-0 right-0 w-32 h-32 bg-brand-green/10 blur-[40px]"></div>
+                    <!-- Screen Content -->
+                    <div id="phoneScreen" class="h-full flex flex-col p-6 pt-14 relative overflow-hidden transition-colors duration-500 bg-brand-card">
                         
-                        <div class="flex justify-between items-start mb-4">
-                            <div class="bg-gray-800 p-2 rounded-xl">
-                                <i class="ph-fill ph-sneaker-move text-xl text-white"></i>
+                        <!-- Header -->
+                        <div class="flex justify-between items-center mb-8 fade-in">
+                            <div><h3 class="text-xl font-bold text-white">Bonjour, Alex</h3></div>
+                            <div class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-xs text-gray-400">ME</div>
+                        </div>
+
+                        <!-- Main Card (Unvalidated) -->
+                        <div id="taskCard" class="bg-[#1A1A1A] p-6 rounded-3xl border border-white/5 shadow-2xl relative overflow-hidden group transition-all duration-500">
+                            <div class="flex justify-between items-start mb-6">
+                                <div class="bg-gray-800 p-3 rounded-xl"><i class="ph-fill ph-sneaker-move text-2xl text-white"></i></div>
+                                <span class="bg-brand-red/10 text-brand-red text-xs font-bold px-3 py-1 rounded-full border border-brand-red/20">En danger : 5€</span>
                             </div>
-                            <span class="bg-red-500/10 text-red-500 text-xs font-bold px-2 py-1 rounded-md">En jeu : 5€</span>
-                        </div>
-                        
-                        <h4 class="text-2xl font-display font-bold mb-1">Running</h4>
-                        <p class="text-sm text-gray-400 mb-6">30 min / Zone 2</p>
+                            <h4 class="text-3xl font-display font-bold mb-1 text-white">Running</h4>
+                            <p class="text-sm text-gray-500 mb-8">Cut-off : 23h59</p>
 
-                        <div class="w-full bg-gray-800 h-1.5 rounded-full mb-6">
-                            <div class="bg-brand-green h-1.5 rounded-full w-0 group-hover:w-full transition-all duration-[2s]"></div>
+                            <button id="demoBtn" onclick="triggerSuccess()" class="w-full bg-brand-green text-black font-bold py-4 rounded-2xl hover:brightness-110 transition flex items-center justify-center gap-2 relative overflow-hidden">
+                                <span class="relative z-10">SIMULER LA SÉANCE</span>
+                                <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                            </button>
                         </div>
 
-                        <button class="w-full bg-brand-green text-black font-bold py-3 rounded-xl hover:bg-white transition flex items-center justify-center gap-2">
-                            <i class="ph-bold ph-check-circle"></i>
-                            VALIDER MA SÉANCE
-                        </button>
-                        <p class="text-[10px] text-center text-gray-500 mt-3">Cut-off : 23h59</p>
-                    </div>
-
-                    <div class="mt-6 mx-4 grid grid-cols-2 gap-4">
-                        <div class="bg-gray-900 p-4 rounded-2xl border border-white/5">
-                            <p class="text-xs text-gray-500 mb-1">Argent sauvé</p>
-                            <p class="text-xl font-bold text-white">45€</p>
+                        <!-- Success Message (Hidden by default) -->
+                        <div id="successMessage" class="hidden absolute inset-0 flex flex-col items-center justify-center bg-brand-green z-20 text-black text-center p-6 animation-pop">
+                            <div class="w-20 h-20 bg-black rounded-full flex items-center justify-center mb-6 text-brand-green text-4xl">
+                                <i class="ph-bold ph-check"></i>
+                            </div>
+                            <h3 class="text-3xl font-bold mb-2">VALIDÉ !</h3>
+                            <p class="text-lg font-medium opacity-80">Tu as sauvé 5,00€.</p>
+                            <button onclick="resetDemo()" class="mt-8 text-xs font-bold underline opacity-60 hover:opacity-100">Recommencer la démo</button>
                         </div>
-                        <div class="bg-gray-900 p-4 rounded-2xl border border-white/5">
-                            <p class="text-xs text-gray-500 mb-1">Série</p>
-                            <p class="text-xl font-bold text-white">9 Jours</p>
+
+                        <!-- Bottom Stats -->
+                        <div class="mt-auto grid grid-cols-2 gap-4 fade-in">
+                            <div class="bg-[#1A1A1A] p-4 rounded-2xl">
+                                <p class="text-[10px] text-gray-500 uppercase">Argent Sauvé</p>
+                                <p class="text-xl font-bold text-white">45€</p>
+                            </div>
+                            <div class="bg-[#1A1A1A] p-4 rounded-2xl">
+                                <p class="text-[10px] text-gray-500 uppercase">Série</p>
+                                <p class="text-xl font-bold text-brand-green">🔥 9</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -159,77 +146,76 @@
         </div>
     </section>
 
-    <!-- CONCEPT SECTION -->
-    <section id="concept" class="py-24 bg-brand-black">
+    <!-- BENTO GRID SECTION (Modern Layout) -->
+    <section id="features" class="py-24 bg-black border-t border-white/5">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center max-w-3xl mx-auto mb-20">
-                <h2 class="text-3xl md:text-5xl font-display font-bold mb-6">Pourquoi ton cerveau a besoin de perdre.</h2>
-                <p class="text-gray-400 text-lg">
-                    Gagner 5€ fait plaisir. Perdre 5€ fait mal. <br>
-                    Psychologiquement, la douleur de la perte est <strong>2x plus puissante</strong> que le plaisir du gain. MOVE pirate ce biais pour te forcer à agir.
+            <h2 class="text-4xl font-display font-bold mb-16 text-center">La science de la discipline</h2>
+            
+            <div class="grid md:grid-cols-3 md:grid-rows-2 gap-6 h-auto md:h-[600px]">
+                
+                <!-- Large Box (Left) -->
+                <div class="md:col-span-2 md:row-span-2 bg-brand-card rounded-3xl p-10 border border-white/5 hover:border-brand-green/20 transition group relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-10 opacity-10 group-hover:opacity-20 transition transform group-hover:scale-110 duration-700">
+                        <i class="ph-fill ph-brain text-9xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-brand-green">Aversion à la Perte</h3>
+                    <p class="text-gray-400 text-lg leading-relaxed max-w-md">
+                        En psychologie comportementale, la douleur de perdre 10€ est deux fois plus puissante que le plaisir de gagner 10€. <br><br>
+                        MOVE pirate ce biais. Nous transformons ta procrastination en danger financier immédiat.
+                    </p>
+                    <div class="mt-8 inline-block px-4 py-2 bg-white/5 rounded-lg text-sm text-gray-300">
+                        Source: Daniel Kahneman (Nobel Prize)
+                    </div>
+                </div>
+
+                <!-- Box (Right Top) -->
+                <div class="bg-brand-card rounded-3xl p-8 border border-white/5 hover:border-white/10 transition flex flex-col justify-center">
+                    <div class="w-10 h-10 bg-brand-red/20 text-brand-red rounded-full flex items-center justify-center mb-4"><i class="ph-bold ph-clock-countdown text-xl"></i></div>
+                    <h3 class="text-xl font-bold mb-2">Cut-off Strict</h3>
+                    <p class="text-sm text-gray-400">23h59. Pas une minute de plus. L'urgence crée l'action.</p>
+                </div>
+
+                <!-- Box (Right Bottom) -->
+                <div class="bg-brand-card rounded-3xl p-8 border border-white/5 hover:border-white/10 transition flex flex-col justify-center">
+                    <div class="w-10 h-10 bg-brand-green/20 text-brand-green rounded-full flex items-center justify-center mb-4"><i class="ph-bold ph-shield-check text-xl"></i></div>
+                    <h3 class="text-xl font-bold mb-2">Plafond Safe</h3>
+                    <p class="text-sm text-gray-400">Max 50€ de perte par semaine. On veut te motiver, pas te ruiner.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CALCULATOR SECTION (Interactive) -->
+    <section id="calculator" class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-brand-green/5"></div>
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+            <span class="text-brand-green font-bold tracking-widest text-xs uppercase mb-4 block">Simulateur de Douleur</span>
+            <h2 class="text-4xl md:text-5xl font-display font-bold mb-12">Combien vaux ta parole ?</h2>
+
+            <div class="bg-black/80 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-12 shadow-2xl">
+                <div class="mb-10">
+                    <label class="block text-gray-400 text-sm mb-4">Ta mise par jour manqué</label>
+                    <div class="flex items-center gap-6">
+                        <span class="text-gray-500 font-bold">1€</span>
+                        <input type="range" id="betSlider" min="1" max="20" value="5" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-brand-green">
+                        <span class="text-gray-500 font-bold">20€</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-8 border-t border-white/10 pt-8">
+                    <div>
+                        <p class="text-gray-500 text-sm mb-1">Mise choisie</p>
+                        <p class="text-4xl font-bold text-white" id="betDisplay">5€</p>
+                    </div>
+                    <div>
+                        <p class="text-brand-red text-sm mb-1">Coût mensuel (si 0 effort)</p>
+                        <p class="text-4xl font-bold text-brand-red" id="lossDisplay">-150€</p>
+                    </div>
+                </div>
+                
+                <p class="mt-8 text-sm text-gray-400 italic">
+                    "Si tu n'es pas prêt à perdre <span id="dynamicLoss">-150€</span>, alors lève-toi et fais le travail."
                 </p>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-brand-card p-8 rounded-3xl border border-white/5 hover:border-white/10 transition group">
-                    <div class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition">🎯</div>
-                    <h3 class="text-xl font-bold mb-4">1. L'Engagement</h3>
-                    <p class="text-gray-400 leading-relaxed">Tu choisis une habitude et ta mise (ex: 5€). C'est le prix de ton échec.</p>
-                </div>
-                <div class="bg-brand-card p-8 rounded-3xl border border-white/5 hover:border-white/10 transition group">
-                    <div class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition">⚡️</div>
-                    <h3 class="text-xl font-bold mb-4">2. L'Action</h3>
-                    <p class="text-gray-400 leading-relaxed">Cut-off strict à 23h59. Pas de GPS, juste ta conscience.</p>
-                </div>
-                <div class="bg-brand-card p-8 rounded-3xl border border-white/5 hover:border-brand-red/30 transition group">
-                    <div class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition">💸</div>
-                    <h3 class="text-xl font-bold mb-4">3. La Sentence</h3>
-                    <p class="text-gray-400 leading-relaxed">Réussite = 0€. Échec = Débit immédiat. Non remboursable.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION REGLES -->
-    <section id="regles" class="py-24 px-6 relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-b from-brand-red/5 to-transparent pointer-events-none"></div>
-        <div class="max-w-4xl mx-auto relative">
-            <div class="text-center mb-16">
-                <span class="text-brand-red font-bold tracking-widest text-xs uppercase border border-brand-red/30 px-3 py-1 rounded-full bg-brand-red/10">Zone de vérité</span>
-                <h2 class="text-4xl font-display font-bold mt-6 mb-4">Les Règles du Jeu</h2>
-            </div>
-            <div class="grid md:grid-cols-2 gap-6">
-                <div class="bg-black/50 border border-brand-red/20 p-6 rounded-2xl flex gap-4">
-                    <i class="ph-fill ph-clock-afternoon text-2xl text-brand-red"></i>
-                    <div><h4 class="font-bold text-white mb-2">Cut-off Strict</h4><p class="text-sm text-gray-400">À 00h00, c'est trop tard.</p></div>
-                </div>
-                <div class="bg-black/50 border border-brand-red/20 p-6 rounded-2xl flex gap-4">
-                    <i class="ph-fill ph-hand-coins text-2xl text-brand-red"></i>
-                    <div><h4 class="font-bold text-white mb-2">Non-Remboursable</h4><p class="text-sm text-gray-400">"J'ai oublié" n'est pas une excuse.</p></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION FAQ -->
-    <section id="faq" class="py-24 bg-brand-card border-t border-white/5">
-        <div class="max-w-3xl mx-auto px-6">
-            <h2 class="text-3xl font-display font-bold mb-12 text-center">Questions Fréquentes</h2>
-            <div class="space-y-4">
-                <details class="group bg-black/30 rounded-xl overflow-hidden border border-white/5">
-                    <summary class="flex justify-between items-center p-6 cursor-pointer font-medium hover:bg-white/5 transition">
-                        Est-ce que c'est du pari en ligne ?
-                        <i class="ph-bold ph-caret-down group-open:rotate-180 transition"></i>
-                    </summary>
-                    <div class="px-6 pb-6 text-gray-400 text-sm">Non. L'argent perdu n'est pas redistribué. C'est un service de motivation.</div>
-                </details>
-                <details class="group bg-black/30 rounded-xl overflow-hidden border border-white/5">
-                    <summary class="flex justify-between items-center p-6 cursor-pointer font-medium hover:bg-white/5 transition">
-                        Et si je triche ?
-                        <i class="ph-bold ph-caret-down group-open:rotate-180 transition"></i>
-                    </summary>
-                    <div class="px-6 pb-6 text-gray-400 text-sm">C'est basé sur l'honneur. Si tu triches, tu perds ton intégrité et l'app est inutile.</div>
-                </details>
             </div>
         </div>
     </section>
@@ -237,48 +223,31 @@
     <!-- FOOTER -->
     <footer class="bg-black py-12 border-t border-white/10 text-center">
         <div class="max-w-7xl mx-auto px-6">
-            <p class="text-xs text-gray-600">MOVE v1.0 — Fait avec discipline.</p>
+            <p class="text-xs text-gray-600">MOVE © 2024 — Le prix de la discipline.</p>
         </div>
     </footer>
 
-    <!-- MODAL D'INSCRIPTION -->
+    <!-- MODAL -->
     <div id="modal" class="fixed inset-0 z-[100] hidden">
-        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity" id="modalBackdrop"></div>
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-md transition-opacity" id="modalBackdrop"></div>
         <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-md p-4">
             <div class="bg-[#121212] border border-white/10 rounded-3xl p-8 shadow-2xl relative">
                 <button id="closeModalBtn" class="absolute top-4 right-4 text-gray-500 hover:text-white"><i class="ph-bold ph-x text-xl"></i></button>
 
-                <div class="text-center mb-8">
-                    <div class="w-12 h-12 bg-brand-green/10 rounded-full flex items-center justify-center mx-auto mb-4 text-brand-green">
-                        <i class="ph-fill ph-lock-key text-2xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-2">Définis ton Pacte</h3>
-                    <p class="text-sm text-gray-400">Pas de débit aujourd'hui.</p>
-                </div>
+                <h3 class="text-2xl font-bold mb-2 text-center">Rejoindre la Bêta</h3>
+                <p class="text-sm text-gray-400 text-center mb-6">Places limitées. iOS & Android.</p>
 
                 <form id="pacteForm" class="space-y-4">
-                    <div>
-                        <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Ton Prénom</label>
-                        <input type="text" class="w-full bg-black border border-white/10 rounded-xl p-3 text-white focus:border-brand-green outline-none transition" placeholder="Ex: Alex" required>
-                    </div>
-                    <div class="bg-brand-card p-4 rounded-xl border border-white/5 flex justify-between items-center">
-                        <span class="text-sm text-gray-300">Mise quotidienne</span>
-                        <span class="text-xl font-bold text-brand-green">5,00 €</span>
-                    </div>
-                    <div class="flex items-start gap-3 py-2">
-                        <input type="checkbox" required class="mt-1 bg-black border-gray-600 rounded text-brand-green focus:ring-brand-green">
-                        <p class="text-xs text-gray-500 leading-tight">Je reconnais que les jours manqués seront facturés.</p>
-                    </div>
-                    <button type="submit" id="submitBtn" class="w-full bg-brand-green text-black font-bold py-4 rounded-full hover:bg-white transition flex items-center justify-center gap-2">
-                        <span>Sécuriser avec Stripe</span>
-                        <i class="ph-bold ph-lock-key-open"></i>
+                    <input type="text" class="w-full bg-black border border-white/10 rounded-xl p-4 text-white focus:border-brand-green outline-none" placeholder="Ton Prénom" required>
+                    <input type="email" class="w-full bg-black border border-white/10 rounded-xl p-4 text-white focus:border-brand-green outline-none" placeholder="Email" required>
+                    <button type="submit" id="submitBtn" class="w-full bg-brand-green text-black font-bold py-4 rounded-xl hover:bg-white transition">
+                        Sécuriser ma place
                     </button>
                 </form>
             </div>
         </div>
     </div>
 
-    <!-- Lien vers ton fichier JS externe -->
     <script src="script.js"></script>
 </body>
 </html>
