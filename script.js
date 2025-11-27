@@ -1,119 +1,123 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // ============================================
-  // 1. TÉLÉPHONE & CONFETTIS (L'effet WOW)
-  // ============================================
+  // 1. TÉLÉPHONE & CONFETTIS
   const successScreen = document.getElementById("successMessage");
-
-  // Fonction appelée par le bouton du téléphone
   window.triggerSuccess = function () {
-    // Afficher l'écran vert
     successScreen.classList.remove("hidden");
-
-    // --- LANCER LES CONFETTIS ---
-    const duration = 3000;
-    const end = Date.now() + duration;
-
-    (function frame() {
-      // Confettis venant de la gauche
-      confetti({
-        particleCount: 5,
-        angle: 60,
-        spread: 55,
-        origin: { x: 0 },
-        colors: ["#00FF94", "#ffffff"],
-      });
-      // Confettis venant de la droite
-      confetti({
-        particleCount: 5,
-        angle: 120,
-        spread: 55,
-        origin: { x: 1 },
-        colors: ["#00FF94", "#ffffff"],
-      });
-
-      if (Date.now() < end) {
-        requestAnimationFrame(frame);
-      }
-    })();
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.6 },
+      colors: ["#00FF94", "#ffffff"],
+    });
   };
-
-  // Reset pour refaire la démo
   window.resetDemo = function () {
     successScreen.classList.add("hidden");
   };
 
-  // ============================================
-  // 2. LIVE TICKER (Effet Bourse)
-  // ============================================
+  // 2. LIVE TICKER (Preuve Sociale)
   const tickerContainer = document.getElementById("tickerContent");
   const tickerClone = document.getElementById("tickerContentClone");
-
-  // Fausses données pour créer la preuve sociale
   const activities = [
-    { name: "Thomas", action: "a engagé 10€ sur Running", type: "new" },
+    { name: "Thomas", action: "a engagé 10€", type: "new" },
     { name: "Sarah", action: "a validé Séance 3/4", type: "success" },
     { name: "Lucas", action: "a perdu 5€ (Oups)", type: "fail" },
     { name: "Emma", action: "a rejoint la Bêta", type: "new" },
-    { name: "David", action: "a sauvé 50€ cette semaine", type: "success" },
+    { name: "David", action: "a sauvé 50€", type: "success" },
     { name: "Julie", action: "a validé Détox", type: "success" },
-    { name: "Karim", action: "a engagé 5€", type: "new" },
   ];
-
   function createTickerItem(item) {
-    let icon = "";
-    let color = "";
-
-    if (item.type === "success") {
-      icon = "🔥";
-      color = "text-brand-green";
-    } else if (item.type === "fail") {
-      icon = "💸";
-      color = "text-brand-red";
-    } else {
-      icon = "🔒";
-      color = "text-gray-400";
-    }
-
-    return `
-            <div class="flex items-center gap-2 text-sm font-mono opacity-80">
-                <span class="text-xl">${icon}</span>
-                <span class="font-bold text-white">${item.name}</span>
-                <span class="${color}">${item.action}</span>
-            </div>
-        `;
+    let icon =
+      item.type === "success" ? "🔥" : item.type === "fail" ? "💸" : "🔒";
+    let color =
+      item.type === "success"
+        ? "text-brand-green"
+        : item.type === "fail"
+        ? "text-brand-red"
+        : "text-gray-400";
+    return `<div class="flex items-center gap-2 text-sm font-mono opacity-80"><span class="text-xl">${icon}</span><span class="font-bold text-white">${item.name}</span><span class="${color}">${item.action}</span></div>`;
   }
-
-  // Remplir les deux conteneurs (pour l'effet infini)
   const tickerHTML = activities.map((item) => createTickerItem(item)).join("");
-  if (tickerContainer && tickerClone) {
+  if (tickerContainer) {
     tickerContainer.innerHTML = tickerHTML;
     tickerClone.innerHTML = tickerHTML;
   }
 
   // ============================================
-  // 3. CALCULATEUR (Simulateur de douleur)
+  // 3. CALCULATEUR AMÉLIORÉ (VISUALISATION)
   // ============================================
   const slider = document.getElementById("betSlider");
   const betDisplay = document.getElementById("betDisplay");
   const lossDisplay = document.getElementById("lossDisplay");
+  const lossEquivalent = document.getElementById("lossEquivalent");
+
+  // Base de données des équivalences
+  function getEquivalent(amount) {
+    if (amount <= 30) return { icon: "🥙", text: "Soit 3 Menus Kebab" };
+    if (amount <= 60) return { icon: "🎮", text: "Soit 1 Jeu Vidéo Neuf" };
+    if (amount <= 120) return { icon: "🛒", text: "Soit 1 Semaine de Courses" };
+    if (amount <= 200)
+      return { icon: "👟", text: "Soit 1 Paire de Air Jordan" };
+    if (amount <= 300)
+      return { icon: "✈️", text: "Soit 1 Billet A/R pour Ibiza" };
+    if (amount <= 500)
+      return { icon: "📱", text: "Soit 1 iPhone reconditionné" };
+    return { icon: "💎", text: "Soit beaucoup trop d'argent" };
+  }
 
   if (slider) {
     slider.addEventListener("input", (e) => {
       const val = e.target.value;
-      const monthlyLoss = val * 30; // Hypothèse: 30 jours ratés
+      const monthlyLoss = val * 30;
 
       betDisplay.innerText = val + "€";
       lossDisplay.innerText = "-" + monthlyLoss + "€";
 
-      // Petit effet de "secousse" sur le chiffre rouge
+      // Mise à jour de la visualisation
+      const equiv = getEquivalent(monthlyLoss);
+      lossEquivalent.innerHTML = `<span class="text-xl">${equiv.icon}</span> <span>${equiv.text}</span>`;
+
       lossDisplay.style.transform = "scale(1.1)";
       setTimeout(() => (lossDisplay.style.transform = "scale(1)"), 100);
     });
+    // Init au chargement
+    const initialLoss = slider.value * 30;
+    const initialEquiv = getEquivalent(initialLoss);
+    lossEquivalent.innerHTML = `<span class="text-xl">${initialEquiv.icon}</span> <span>${initialEquiv.text}</span>`;
   }
 
   // ============================================
-  // 4. GESTION DU MODAL (Inscription)
+  // 4. WALL OF SHAME (CAROUSEL)
   // ============================================
+  const shameContainer = document.getElementById("shameContainer");
+  const shameData = [
+    { name: "Maxime", loss: "-10€", excuse: "J'avais plus de batterie..." },
+    { name: "Chloé", loss: "-5€", excuse: "Il pleuvait, flemme." },
+    { name: "Sofiane", loss: "-20€", excuse: "J'ai zappé de cliquer." },
+    { name: "Léa", loss: "-15€", excuse: "Netflix a sorti la S4..." },
+    { name: "Thomas", loss: "-5€", excuse: "C'était l'anniv de mon chat." },
+    { name: "Antoine", loss: "-50€", excuse: "J'ai parié trop gros." },
+    { name: "Marie", loss: "-5€", excuse: "J'ai perdu mon tel." },
+  ];
+
+  function createShameCard(item) {
+    return `
+            <div class="w-64 bg-[#151515] border border-white/5 p-5 rounded-2xl flex-shrink-0 hover:border-brand-red/30 transition group">
+                <div class="flex justify-between items-start mb-3">
+                    <span class="text-gray-500 text-xs font-bold uppercase">${item.name}</span>
+                    <span class="text-brand-red font-bold text-sm bg-brand-red/10 px-2 py-1 rounded-md">${item.loss}</span>
+                </div>
+                <p class="text-gray-300 italic text-sm">"${item.excuse}"</p>
+            </div>
+        `;
+  }
+
+  // On double la liste pour l'effet infini
+  const shameHTML = [...shameData, ...shameData]
+    .map((item) => createShameCard(item))
+    .join("");
+  if (shameContainer) shameContainer.innerHTML = shameHTML;
+
+  // 5. MODAL
   const modal = document.getElementById("modal");
   const openBtns = document.querySelectorAll(".open-modal-btn");
   const closeBtn = document.getElementById("closeModalBtn");
@@ -125,34 +129,27 @@ document.addEventListener("DOMContentLoaded", () => {
     modal.classList.remove("hidden");
     document.body.style.overflow = "hidden";
   }
-
   function closeModal() {
     modal.classList.add("hidden");
     document.body.style.overflow = "";
   }
 
-  // Listeners
   openBtns.forEach((btn) => btn.addEventListener("click", openModal));
   if (closeBtn) closeBtn.addEventListener("click", closeModal);
   if (backdrop) backdrop.addEventListener("click", closeModal);
 
-  // Soumission du formulaire
   if (form) {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       const originalText = submitBtn.innerHTML;
-
-      // Confettis aussi à l'inscription !
       confetti({
         particleCount: 100,
         spread: 70,
         origin: { y: 0.6 },
         colors: ["#00FF94", "#ffffff"],
       });
-
       submitBtn.innerHTML = "Validation...";
       submitBtn.classList.add("opacity-75");
-
       setTimeout(() => {
         alert("🔥 Bienvenue dans la meute MOVE.");
         submitBtn.innerHTML = originalText;
