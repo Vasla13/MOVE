@@ -1,8 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // --- 0. INITIALISATION DES CONFETTIS ---
+  // --- 0. CONFETTIS ---
   const globalCanvas = document.getElementById("global-confetti");
   const myConfetti = confetti.create(globalCanvas, { resize: true });
-
   const phoneCanvas = document.getElementById("phone-confetti");
   const phoneConfetti = confetti.create(phoneCanvas, { resize: true });
 
@@ -19,24 +18,27 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // --- 2. LOGIQUE TÉLÉPHONE & SWITCHER ---
+  // --- 2. LOGIQUE TÉLÉPHONE ---
   const successScreen = document.getElementById("successMessage");
   const taskIcon = document.getElementById("taskIcon");
   const taskTitle = document.getElementById("taskTitle");
   const taskSub = document.getElementById("taskSub");
+
   const habits = {
     run: { title: "Running", icon: "ph-sneaker-move", sub: "30 min / Zone 2" },
     book: { title: "Lecture", icon: "ph-book-open", sub: "20 pages mini" },
-    detox: { title: "Détox", icon: "ph-prohibit", sub: "Pas de TikTok" },
     sleep: { title: "Sommeil", icon: "ph-moon-stars", sub: "Couché 23h00" },
   };
 
   window.switchHabit = function (habitKey, btnElement) {
-    // Reset l'apparence de tous les boutons
+    // Reset boutons
     document.querySelectorAll(".habit-btn").forEach((b) => {
-      // Retire la classe 'active'
       b.classList.remove("active");
-      // Réinitialise les couleurs des icônes
+
+      // Reset icône
+      const iconWrapper = b.querySelector(".icon-bg");
+      if (iconWrapper) iconWrapper.classList.remove("bg-brand-green/20");
+
       const icon = b.querySelector("i");
       if (icon) {
         icon.className = icon.className.replace(
@@ -46,22 +48,38 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!icon.className.includes("text-gray-500"))
           icon.classList.add("text-gray-500");
       }
+
+      // Reset texte
+      const text = b.querySelector("span");
+      if (text) {
+        text.classList.remove("text-brand-green");
+        text.classList.add("text-gray-500");
+      }
     });
 
-    // Active le bouton cliqué
+    // Active bouton
     btnElement.classList.add("active");
+
     const activeIcon = btnElement.querySelector("i");
     if (activeIcon) {
       activeIcon.classList.remove("text-gray-500");
       activeIcon.classList.add("text-brand-green");
     }
 
-    // Met à jour l'écran
+    const activeText = btnElement.querySelector("span");
+    if (activeText) {
+      activeText.classList.remove("text-gray-500");
+      activeText.classList.add("text-brand-green");
+    }
+
+    // MAJ Écran
     successScreen.classList.add("hidden");
     const data = habits[habitKey];
     taskTitle.innerText = data.title;
-    taskSub.innerText = data.sub;
-    taskIcon.className = `ph-fill ${data.icon} text-2xl text-white`;
+    taskSub.innerHTML = `<i class="ph-fill ph-clock"></i> Cut-off : 23h59`;
+    taskSub.previousElementSibling.innerText = data.sub; // Petite astuce pour le sous-titre si besoin, sinon on garde le titre
+
+    taskIcon.className = `ph-fill ${data.icon} text-3xl text-white`;
 
     const card = document.getElementById("taskCard");
     card.classList.remove("fadeIn");
@@ -71,8 +89,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.triggerSuccess = function () {
     successScreen.classList.remove("hidden");
-
-    // CONFETTIS DANS LE TÉLÉPHONE UNIQUEMENT
     phoneConfetti({
       particleCount: 80,
       spread: 60,
@@ -140,44 +156,26 @@ document.addEventListener("DOMContentLoaded", () => {
       .map((item) => createShameCard(item))
       .join("");
 
-  // --- 5. MODAL (INSCRIPTION / SIMULATION) ---
-
+  // --- 5. MODAL ---
   function showCustomModal(title, message) {
     const modal = document.createElement("div");
     modal.className =
       "fixed inset-0 z-[300] flex items-center justify-center p-4";
-
     const backdrop = document.createElement("div");
     backdrop.className =
       "absolute inset-0 bg-black/90 backdrop-blur-sm transition-opacity duration-300 opacity-0";
     modal.appendChild(backdrop);
-
     const content = document.createElement("div");
     content.className =
       "relative bg-[#121212] border border-white/10 rounded-3xl p-8 max-w-sm w-full shadow-2xl transform scale-95 opacity-0 transition-all duration-300";
-
-    content.innerHTML = `
-            <div class="text-center">
-                <div class="w-12 h-12 bg-brand-green/10 rounded-full flex items-center justify-center mx-auto mb-4 text-brand-green text-2xl">
-                    <i class="ph-bold ph-info"></i>
-                </div>
-                <h3 class="text-xl font-bold text-white mb-2">${title}</h3>
-                <p class="text-sm text-gray-400 leading-relaxed mb-6">${message}</p>
-                <button class="w-full bg-brand-green text-black font-bold py-3 rounded-xl hover:bg-white transition">
-                    C'est compris
-                </button>
-            </div>
-        `;
-
+    content.innerHTML = `<div class="text-center"><div class="w-12 h-12 bg-brand-green/10 rounded-full flex items-center justify-center mx-auto mb-4 text-brand-green text-2xl"><i class="ph-bold ph-info"></i></div><h3 class="text-xl font-bold text-white mb-2">${title}</h3><p class="text-sm text-gray-400 leading-relaxed mb-6">${message}</p><button class="w-full bg-brand-green text-black font-bold py-3 rounded-xl hover:bg-white transition">C'est compris</button></div>`;
     modal.appendChild(content);
     document.body.appendChild(modal);
-
     requestAnimationFrame(() => {
       backdrop.classList.remove("opacity-0");
       content.classList.remove("scale-95", "opacity-0");
       content.classList.add("scale-100", "opacity-100");
     });
-
     const btn = content.querySelector("button");
     const close = () => {
       backdrop.classList.add("opacity-0");
@@ -185,7 +183,6 @@ document.addEventListener("DOMContentLoaded", () => {
       content.classList.add("scale-95", "opacity-0");
       setTimeout(() => modal.remove(), 300);
     };
-
     btn.onclick = close;
     backdrop.onclick = close;
   }
@@ -196,7 +193,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const backdrop = document.getElementById("modalBackdrop");
   const form = document.getElementById("pacteForm");
   const submitBtn = document.getElementById("submitBtn");
-
   function openModal() {
     modal.classList.remove("hidden");
     document.body.style.overflow = "hidden";
@@ -205,16 +201,13 @@ document.addEventListener("DOMContentLoaded", () => {
     modal.classList.add("hidden");
     document.body.style.overflow = "";
   }
-
   openBtns.forEach((btn) => btn.addEventListener("click", openModal));
   if (closeBtn) closeBtn.addEventListener("click", closeModal);
   if (backdrop) backdrop.addEventListener("click", closeModal);
-
   if (form) {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       const originalText = submitBtn.innerHTML;
-
       submitBtn.innerHTML = "Simulation en cours...";
       submitBtn.classList.add("opacity-75");
       setTimeout(() => {
@@ -222,7 +215,6 @@ document.addEventListener("DOMContentLoaded", () => {
           "Simulation Terminée",
           "Merci de votre intérêt !<br><br>Ceci est une démonstration technique. Aucune transaction n'a été effectuée et aucune donnée n'a été enregistrée."
         );
-
         submitBtn.innerHTML = originalText;
         submitBtn.classList.remove("opacity-75");
         closeModal();
@@ -230,7 +222,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }, 1000);
     });
   }
-
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {

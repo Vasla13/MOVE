@@ -44,10 +44,12 @@
   <body
     class="bg-brand-black text-white antialiased selection:bg-brand-green selection:text-black overflow-x-hidden"
   >
+    <!-- CANVAS GLOBAL -->
     <canvas
       id="global-confetti"
       class="fixed inset-0 pointer-events-none z-[200]"
     ></canvas>
+
     <div
       class="fixed inset-0 pointer-events-none opacity-[0.03] mix-blend-overlay z-[50]"
       style="
@@ -55,7 +57,7 @@
       "
     ></div>
 
-    <!-- BANDEAU AVERTISSEMENT -->
+    <!-- BANDEAU -->
     <div
       id="demo-banner"
       class="fixed top-0 left-0 w-full h-10 bg-brand-green text-black z-[100] flex items-center justify-center text-center px-2 font-bold text-xs md:text-sm uppercase tracking-widest shadow-lg"
@@ -89,7 +91,7 @@
             >Le Mur</a
           >
           <a href="#transparency" class="hover:text-white transition"
-            >Responsabilité & Choix</a
+            >Responsabilité</a
           >
         </div>
         <button
@@ -117,6 +119,7 @@
       <div
         class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center"
       >
+        <!-- TEXTE GAUCHE -->
         <div class="z-10 relative">
           <div class="animate-on-load" style="animation-delay: 100ms">
             <div
@@ -166,7 +169,7 @@
           </div>
         </div>
 
-        <!-- PHONE DEMO WRAPPER -->
+        <!-- TÉLÉPHONE PERFECT -->
         <div
           class="flex flex-col items-center gap-8 animate-on-load"
           style="animation-delay: 600ms"
@@ -175,158 +178,167 @@
             class="relative z-10 lg:h-[720px] flex justify-center items-center"
           >
             <div
-              class="phone-mockup w-[340px] h-[680px] bg-[#1a1a1a] flex flex-col relative transition-transform duration-500 hover:scale-[1.01] shadow-[0_30px_60px_-10px_rgba(0,0,0,0.8)]"
+              class="phone-mockup w-[340px] h-[680px] bg-[#000] flex flex-col relative transition-transform duration-500 hover:scale-[1.01] shadow-[0_40px_80px_-20px_rgba(0,0,0,0.8)]"
             >
+              <!-- Canvas Local -->
               <canvas
                 id="phone-confetti"
                 class="absolute inset-0 w-full h-full z-50 pointer-events-none rounded-[40px]"
               ></canvas>
+              <!-- Dynamic Island -->
               <div class="dynamic-island z-40"></div>
 
+              <!-- Écran -->
               <div
                 id="phoneScreen"
-                class="h-full w-full flex flex-col p-6 pt-12 relative overflow-hidden transition-colors duration-500 bg-brand-black rounded-[40px]"
+                class="h-full w-full flex flex-col p-6 pt-14 relative overflow-hidden transition-colors duration-500 bg-brand-black rounded-[44px]"
               >
-                <!-- STATUS BAR -->
+                <!-- Status Bar -->
                 <div
-                  class="absolute top-3 left-8 text-xs font-medium text-white z-30"
+                  class="absolute top-4 left-9 text-xs font-semibold text-white z-30 tracking-wide"
                 >
                   9:41
                 </div>
                 <div
-                  class="absolute top-3 right-8 flex gap-1.5 text-white z-30"
+                  class="absolute top-4 right-9 flex gap-1.5 text-white z-30"
                 >
                   <i class="ph-fill ph-cell-signal-full text-xs"></i>
                   <i class="ph-fill ph-wifi-high text-xs"></i>
                   <i class="ph-fill ph-battery-full text-xs"></i>
                 </div>
 
-                <!-- HEADER -->
+                <!-- Header -->
                 <div
-                  class="flex justify-between items-center mt-4 mb-6 fade-in relative z-10"
+                  class="flex justify-between items-end mt-2 mb-6 fade-in relative z-10"
                 >
                   <div>
                     <p
                       class="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1"
                     >
-                      AUJOURD'HUI
+                      Aujourd'hui
                     </p>
-                    <h3 class="text-2xl font-display font-bold text-white">
+                    <h3
+                      class="text-3xl font-display font-bold text-white tracking-tight"
+                    >
                       Bonjour, Alex
                     </h3>
                   </div>
                   <div
-                    class="w-10 h-10 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 border border-white/10 flex items-center justify-center text-xs text-gray-400 font-bold shadow-inner"
+                    class="w-10 h-10 rounded-full bg-gradient-to-br from-gray-700 to-gray-800 border border-white/10 flex items-center justify-center text-xs text-gray-300 font-bold shadow-inner"
                   >
                     ME
                   </div>
                 </div>
 
-                <!-- HABIT SWITCHER (INTÉGRÉ) -->
-                <!-- C'est ici que j'ai déplacé le menu pour qu'il soit DANS l'app -->
-                <div
-                  class="flex gap-2 mb-6 overflow-x-auto pb-2 scrollbar-hide relative z-20"
-                >
+                <!-- MENU HABITUDES (Grille de 3) -->
+                <div class="grid grid-cols-3 gap-3 mb-6 relative z-20">
                   <button
-                    class="habit-btn active flex-1 min-w-[70px] bg-[#222] p-3 rounded-xl border border-white/5 flex flex-col items-center gap-1 transition-all hover:bg-white/10 group"
+                    class="habit-btn active bg-[#1c1c1c] p-3 rounded-2xl border border-white/5 flex flex-col items-center justify-center gap-2 transition-all hover:bg-white/10 h-24 group"
                     onclick="switchHabit('run', this)"
                   >
-                    <i
-                      class="ph-fill ph-sneaker-move text-xl text-brand-green group-hover:scale-110 transition"
-                    ></i>
-                    <span class="text-[9px] text-gray-400 font-bold uppercase"
+                    <div
+                      class="w-10 h-10 rounded-full bg-black/50 flex items-center justify-center icon-bg transition"
+                    >
+                      <i
+                        class="ph-fill ph-sneaker-move text-xl text-brand-green group-hover:scale-110 transition"
+                      ></i>
+                    </div>
+                    <span
+                      class="text-[10px] text-white font-bold uppercase tracking-wide"
                       >Run</span
                     >
                   </button>
+
                   <button
-                    class="habit-btn flex-1 min-w-[70px] bg-[#222] p-3 rounded-xl border border-white/5 flex flex-col items-center gap-1 transition-all hover:bg-white/10 group"
+                    class="habit-btn bg-[#1c1c1c] p-3 rounded-2xl border border-white/5 flex flex-col items-center justify-center gap-2 transition-all hover:bg-white/10 h-24 group"
                     onclick="switchHabit('book', this)"
                   >
-                    <i
-                      class="ph-fill ph-book-open text-xl text-gray-500 group-hover:text-white transition"
-                    ></i>
-                    <span class="text-[9px] text-gray-500 font-bold uppercase"
+                    <div
+                      class="w-10 h-10 rounded-full bg-black/50 flex items-center justify-center icon-bg transition"
+                    >
+                      <i
+                        class="ph-fill ph-book-open text-xl text-gray-500 group-hover:text-white transition"
+                      ></i>
+                    </div>
+                    <span
+                      class="text-[10px] text-gray-500 font-bold uppercase tracking-wide group-hover:text-white"
                       >Lire</span
                     >
                   </button>
+
                   <button
-                    class="habit-btn flex-1 min-w-[70px] bg-[#222] p-3 rounded-xl border border-white/5 flex flex-col items-center gap-1 transition-all hover:bg-white/10 group"
-                    onclick="switchHabit('detox', this)"
-                  >
-                    <i
-                      class="ph-fill ph-prohibit text-xl text-gray-500 group-hover:text-white transition"
-                    ></i>
-                    <span class="text-[9px] text-gray-500 font-bold uppercase"
-                      >Détox</span
-                    >
-                  </button>
-                  <button
-                    class="habit-btn flex-1 min-w-[70px] bg-[#222] p-3 rounded-xl border border-white/5 flex flex-col items-center gap-1 transition-all hover:bg-white/10 group"
+                    class="habit-btn bg-[#1c1c1c] p-3 rounded-2xl border border-white/5 flex flex-col items-center justify-center gap-2 transition-all hover:bg-white/10 h-24 group"
                     onclick="switchHabit('sleep', this)"
                   >
-                    <i
-                      class="ph-fill ph-moon-stars text-xl text-gray-500 group-hover:text-white transition"
-                    ></i>
-                    <span class="text-[9px] text-gray-500 font-bold uppercase"
+                    <div
+                      class="w-10 h-10 rounded-full bg-black/50 flex items-center justify-center icon-bg transition"
+                    >
+                      <i
+                        class="ph-fill ph-moon-stars text-xl text-gray-500 group-hover:text-white transition"
+                      ></i>
+                    </div>
+                    <span
+                      class="text-[10px] text-gray-500 font-bold uppercase tracking-wide group-hover:text-white"
                       >Dodo</span
                     >
                   </button>
                 </div>
 
-                <!-- TASK CARD -->
+                <!-- CARD PRINCIPALE -->
                 <div
                   id="taskCard"
-                  class="bg-gradient-to-b from-[#222] to-[#151515] p-6 rounded-[2rem] border border-white/5 shadow-2xl relative overflow-hidden group transition-all duration-500 mb-4 flex-1 flex flex-col justify-between"
+                  class="bg-gradient-to-br from-[#222] to-[#111] p-6 rounded-[32px] border border-white/5 shadow-2xl relative overflow-hidden group transition-all duration-500 mb-4 flex-1 flex flex-col justify-between"
                 >
                   <div
-                    class="absolute -top-10 -right-10 w-32 h-32 bg-brand-green/5 blur-3xl rounded-full"
+                    class="absolute -top-20 -right-20 w-48 h-48 bg-brand-green/5 blur-[50px] rounded-full"
                   ></div>
 
                   <div>
                     <div
-                      class="flex justify-between items-start mb-6 relative z-10"
+                      class="flex justify-between items-start mb-8 relative z-10"
                     >
                       <div
-                        class="bg-gray-800/50 backdrop-blur-sm p-3 rounded-2xl transition-colors duration-300 border border-white/5"
+                        class="bg-white/5 backdrop-blur-md p-4 rounded-2xl transition-colors duration-300 border border-white/5 shadow-lg"
                         id="taskIconContainer"
                       >
                         <i
-                          class="ph-fill ph-sneaker-move text-2xl text-white"
+                          class="ph-fill ph-sneaker-move text-3xl text-white"
                           id="taskIcon"
                         ></i>
                       </div>
                       <div class="flex flex-col items-end">
                         <span
-                          class="text-[10px] text-gray-500 font-bold uppercase mb-1"
+                          class="text-[9px] text-gray-500 font-bold uppercase tracking-wider mb-1"
                           >En jeu</span
                         >
-                        <span
-                          class="bg-brand-red/10 text-brand-red text-xs font-bold px-3 py-1.5 rounded-full border border-brand-red/20 shadow-sm"
-                          >5,00 €</span
+                        <div
+                          class="bg-brand-red/10 text-brand-red text-sm font-bold px-3 py-1 rounded-full border border-brand-red/20 shadow-sm flex items-center gap-1"
                         >
+                          <i class="ph-bold ph-warning-circle"></i> 5,00 €
+                        </div>
                       </div>
                     </div>
 
                     <h4
-                      class="text-3xl font-display font-bold mb-1 text-white relative z-10"
+                      class="text-4xl font-display font-bold mb-2 text-white relative z-10 tracking-tight"
                       id="taskTitle"
                     >
                       Running
                     </h4>
                     <p
-                      class="text-sm text-gray-500 mb-8 font-medium relative z-10"
+                      class="text-sm text-gray-400 font-medium relative z-10 flex items-center gap-2"
                       id="taskSub"
                     >
-                      Cut-off : 23h59
+                      <i class="ph-fill ph-clock"></i> Cut-off : 23h59
                     </p>
                   </div>
 
                   <button
                     id="demoBtn"
                     onclick="triggerSuccess()"
-                    class="w-full bg-brand-green text-black font-bold py-4 rounded-2xl hover:brightness-110 active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 relative overflow-hidden shadow-[0_0_20px_rgba(0,255,148,0.2)] animate-pulse-slow"
+                    class="w-full bg-brand-green text-black font-bold py-5 rounded-2xl hover:brightness-110 active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 relative overflow-hidden shadow-[0_0_30px_rgba(0,255,148,0.3)] group-hover:shadow-[0_0_40px_rgba(0,255,148,0.5)]"
                   >
-                    <span class="relative z-10">SIMULER (CLIC)</span>
+                    <span class="relative z-10 text-lg">SIMULER (CLIC)</span>
                   </button>
                 </div>
 
@@ -350,37 +362,44 @@
                   </p>
                   <button
                     onclick="resetDemo()"
-                    class="text-xs font-bold bg-black/10 px-4 py-2 rounded-full hover:bg-black/20 transition uppercase tracking-wide"
+                    class="text-xs font-bold bg-black/10 px-6 py-3 rounded-full hover:bg-black/20 transition uppercase tracking-wide"
                   >
                     Recommencer
                   </button>
                 </div>
 
-                <!-- STATS (FOOTER APP) -->
+                <!-- STATS -->
                 <div
-                  class="mt-auto flex gap-3 w-full justify-between fade-in relative z-10"
+                  class="mt-auto flex gap-3 w-full justify-between fade-in relative z-10 mb-4"
                 >
                   <div
-                    class="bg-[#1A1A1A] p-4 rounded-2xl border border-white/5 flex-1 text-center"
+                    class="bg-[#151515] p-4 rounded-2xl border border-white/5 flex-1 text-center shadow-lg"
                   >
                     <p
                       class="text-[9px] text-gray-500 uppercase font-bold mb-1"
                     >
                       Sauvé
                     </p>
-                    <p class="text-lg font-bold text-white">45€</p>
+                    <p class="text-xl font-display font-bold text-white">45€</p>
                   </div>
                   <div
-                    class="bg-[#1A1A1A] p-4 rounded-2xl border border-white/5 flex-1 text-center"
+                    class="bg-[#151515] p-4 rounded-2xl border border-white/5 flex-1 text-center shadow-lg"
                   >
                     <p
                       class="text-[9px] text-gray-500 uppercase font-bold mb-1"
                     >
                       Série
                     </p>
-                    <p class="text-lg font-bold text-brand-green">🔥 9</p>
+                    <p class="text-xl font-display font-bold text-brand-green">
+                      🔥 9
+                    </p>
                   </div>
                 </div>
+
+                <!-- HOME INDICATOR -->
+                <div
+                  class="absolute bottom-2 left-1/2 -translate-x-1/2 w-1/3 h-1.5 bg-white/20 rounded-full z-50"
+                ></div>
               </div>
             </div>
           </div>
@@ -400,7 +419,6 @@
             contrat moral avec toi-même.
           </p>
         </div>
-
         <div class="grid md:grid-cols-3 gap-8">
           <div
             class="bg-brand-card p-10 rounded-3xl border border-white/5 hover:border-brand-green/30 transition group relative overflow-hidden reveal delay-100"
@@ -415,11 +433,9 @@
             </h3>
             <p class="text-gray-400 leading-relaxed">
               Tu définis ton objectif et ta mise (ex: 5€). C'est un contrat
-              légal entre ton ambition et ta flemme. L'argent est "verrouillé"
-              psychologiquement.
+              légal entre ton ambition et ta flemme.
             </p>
           </div>
-
           <div
             class="bg-brand-card p-10 rounded-3xl border border-white/5 hover:border-white/20 transition group relative overflow-hidden reveal delay-200"
           >
@@ -438,13 +454,12 @@
               class="bg-white/5 p-4 rounded-xl border-l-2 border-brand-green"
             >
               <p class="text-xs text-gray-300 italic">
-                <strong>"Et si je mens ?"</strong><br />
-                Tu gardes tes 5€, mais tu perds ton estime de toi. MOVE est pour
-                ceux qui se respectent, pas pour ceux qui trichent au solitaire.
+                <strong>"Et si je mens ?"</strong><br />Tu gardes tes 5€, mais
+                tu perds ton estime de toi. MOVE est pour ceux qui se
+                respectent.
               </p>
             </div>
           </div>
-
           <div
             class="bg-brand-card p-10 rounded-3xl border border-white/5 hover:border-brand-red/40 transition group relative overflow-hidden reveal delay-300"
           >
@@ -458,20 +473,17 @@
               <li class="flex items-start gap-3">
                 <i
                   class="ph-fill ph-check-circle text-brand-green text-xl mt-0.5"
-                ></i>
-                <span
+                ></i
+                ><span
                   ><strong>Réussite :</strong> Tu gardes ton argent et tu as
-                  respecté ta discipline. La satisfaction est ta
-                  récompense.</span
+                  respecté ta discipline.</span
                 >
               </li>
               <li class="flex items-start gap-3">
-                <i
-                  class="ph-fill ph-x-circle text-brand-red text-xl mt-0.5"
-                ></i>
-                <span
+                <i class="ph-fill ph-x-circle text-brand-red text-xl mt-0.5"></i
+                ><span
                   ><strong>Échec :</strong> Tu perds la somme mise
-                  immédiatement. Une leçon douloureuse mais nécessaire.</span
+                  immédiatement.</span
                 >
               </li>
             </ul>
@@ -628,11 +640,10 @@
               <p class="text-gray-400 leading-relaxed">
                 Dans les paramètres, tu contrôles le curseur de générosité. Tu
                 peux donner <strong>jusqu'à 75%</strong> de tes pénalités à des
-                associations partenaires. (Min 0%).
+                associations.
               </p>
             </div>
           </div>
-
           <div
             class="bg-brand-card p-10 rounded-3xl border border-white/5 relative overflow-hidden group"
           >
@@ -651,7 +662,7 @@
               <p class="text-gray-400 leading-relaxed">
                 Le pourcentage restant est utilisé pour payer les frais
                 bancaires (Stripe), l'hébergement des serveurs et faire vivre
-                l'équipe qui développe MOVE.
+                l'équipe.
               </p>
             </div>
           </div>

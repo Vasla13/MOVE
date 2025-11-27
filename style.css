@@ -22,14 +22,15 @@ body {
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* === PHONE MOCKUP === */
+/* === PHONE MOCKUP (TITANE STYLE) === */
 .phone-mockup {
-  border: 12px solid #202020;
-  border-radius: 45px;
+  border: 8px solid #333;
+  border-radius: 56px;
   overflow: hidden;
   position: relative;
   background: #000;
-  box-shadow: 0 40px 80px -20px rgba(0, 255, 148, 0.15);
+  box-shadow: 0 0 0 2px #111, 0 30px 60px -10px rgba(0, 0, 0, 0.8),
+    0 0 50px rgba(0, 255, 148, 0.05);
   transform: rotate(-2deg);
 }
 .notch {
@@ -44,25 +45,29 @@ body {
   border-bottom-right-radius: 16px;
   z-index: 30;
 }
-
-/* === HABIT SWITCHER BUTTONS (CSS Ajusté) === */
-.habit-btn {
-  /* Style par défaut pour les boutons inactifs */
-  color: #666;
+.dynamic-island {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 30px;
+  background: #000;
+  border-radius: 20px;
+  z-index: 50;
+  transition: all 0.3s ease;
 }
+
+/* === HABIT SWITCHER (GRID) === */
 .habit-btn.active {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: var(--brand-green);
-  transform: scale(1.05);
+  background-color: #222;
   border-color: rgba(0, 255, 148, 0.3);
 }
-/* On cache la scrollbar tout en permettant le scroll */
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
+.habit-btn.active .icon-bg {
+  background-color: rgba(0, 255, 148, 0.1);
 }
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+.habit-btn.active span {
+  color: var(--brand-green);
 }
 
 /* === ANIMATIONS === */
