@@ -1,11 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
   // --- 0. INITIALISATION DES CONFETTIS ---
-
-  // Instance Global (Pour la Bêta) - Plein écran
   const globalCanvas = document.getElementById("global-confetti");
   const myConfetti = confetti.create(globalCanvas, { resize: true });
 
-  // Instance Locale (Pour le Téléphone) - Confiné à l'écran du tel
   const phoneCanvas = document.getElementById("phone-confetti");
   const phoneConfetti = confetti.create(phoneCanvas, { resize: true });
 
@@ -56,13 +53,12 @@ document.addEventListener("DOMContentLoaded", () => {
     successScreen.classList.remove("hidden");
 
     // CONFETTIS DANS LE TÉLÉPHONE UNIQUEMENT
-    // On lance une explosion depuis le bas de l'écran du téléphone
     phoneConfetti({
       particleCount: 80,
       spread: 60,
-      origin: { y: 0.8 }, // Part du bas de l'écran du tel
+      origin: { y: 0.8 },
       colors: ["#00FF94", "#ffffff"],
-      scalar: 0.8, // Confettis un peu plus petits pour l'échelle du tel
+      scalar: 0.8,
     });
   };
 
@@ -126,20 +122,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // --- 5. MODAL (INSCRIPTION / SIMULATION) ---
 
-  // Helper pour afficher une belle modale interne au lieu de alert()
   function showCustomModal(title, message) {
-    // Création du conteneur
     const modal = document.createElement("div");
     modal.className =
       "fixed inset-0 z-[300] flex items-center justify-center p-4";
 
-    // Fond sombre flouté
     const backdrop = document.createElement("div");
     backdrop.className =
       "absolute inset-0 bg-black/90 backdrop-blur-sm transition-opacity duration-300 opacity-0";
     modal.appendChild(backdrop);
 
-    // Contenu de la carte
     const content = document.createElement("div");
     content.className =
       "relative bg-[#121212] border border-white/10 rounded-3xl p-8 max-w-sm w-full shadow-2xl transform scale-95 opacity-0 transition-all duration-300";
@@ -160,14 +152,12 @@ document.addEventListener("DOMContentLoaded", () => {
     modal.appendChild(content);
     document.body.appendChild(modal);
 
-    // Animation d'entrée
     requestAnimationFrame(() => {
       backdrop.classList.remove("opacity-0");
       content.classList.remove("scale-95", "opacity-0");
       content.classList.add("scale-100", "opacity-100");
     });
 
-    // Logique de fermeture
     const btn = content.querySelector("button");
     const close = () => {
       backdrop.classList.add("opacity-0");
@@ -205,12 +195,11 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
       const originalText = submitBtn.innerHTML;
 
-      // Suppression des confettis ici
+      // PAS DE CONFETTIS ICI
 
       submitBtn.innerHTML = "Simulation en cours...";
       submitBtn.classList.add("opacity-75");
       setTimeout(() => {
-        // Message de simulation clair via la modale personnalisée
         showCustomModal(
           "Simulation Terminée",
           "Merci de votre intérêt !<br><br>Ceci est une démonstration technique. Aucune transaction n'a été effectuée et aucune donnée n'a été enregistrée."
