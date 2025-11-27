@@ -137,10 +137,12 @@ document.addEventListener("DOMContentLoaded", () => {
         origin: { y: 0.6 },
         colors: ["#00FF94", "#ffffff"],
       });
-      submitBtn.innerHTML = "Pacte Scellé...";
+      submitBtn.innerHTML = "Simulation en cours...";
       submitBtn.classList.add("opacity-75");
       setTimeout(() => {
-        alert("🔥 Bienvenue dans la meute MOVE.");
+        alert(
+          "ℹ️ SIMULATION : Merci de votre intérêt !\n\nCeci est une démonstration technique. Aucune transaction n'a été effectuée et aucune donnée n'a été enregistrée."
+        );
         submitBtn.innerHTML = originalText;
         submitBtn.classList.remove("opacity-75");
         closeModal();
