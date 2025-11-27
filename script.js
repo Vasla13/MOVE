@@ -14,15 +14,12 @@ document.addEventListener("DOMContentLoaded", () => {
     successScreen.classList.add("hidden");
   };
 
-  // ============================================
-  // 2. CALCULATEUR AMÉLIORÉ (VISUALISATION)
-  // ============================================
+  // 2. CALCULATEUR AMÉLIORÉ
   const slider = document.getElementById("betSlider");
   const betDisplay = document.getElementById("betDisplay");
   const lossDisplay = document.getElementById("lossDisplay");
   const lossEquivalent = document.getElementById("lossEquivalent");
 
-  // Base de données des équivalences
   function getEquivalent(amount) {
     if (amount <= 30) return { icon: "🥙", text: "Soit 3 Menus Kebab" };
     if (amount <= 60) return { icon: "🎮", text: "Soit 1 Jeu Vidéo Neuf" };
@@ -44,22 +41,18 @@ document.addEventListener("DOMContentLoaded", () => {
       betDisplay.innerText = val + "€";
       lossDisplay.innerText = "-" + monthlyLoss + "€";
 
-      // Mise à jour de la visualisation
       const equiv = getEquivalent(monthlyLoss);
       lossEquivalent.innerHTML = `<span class="text-xl">${equiv.icon}</span> <span>${equiv.text}</span>`;
 
       lossDisplay.style.transform = "scale(1.1)";
       setTimeout(() => (lossDisplay.style.transform = "scale(1)"), 100);
     });
-    // Init au chargement
     const initialLoss = slider.value * 30;
     const initialEquiv = getEquivalent(initialLoss);
     lossEquivalent.innerHTML = `<span class="text-xl">${initialEquiv.icon}</span> <span>${initialEquiv.text}</span>`;
   }
 
-  // ============================================
-  // 3. WALL OF SHAME (CAROUSEL)
-  // ============================================
+  // 3. WALL OF SHAME
   const shameContainer = document.getElementById("shameContainer");
   const shameData = [
     { name: "Maxime", loss: "-10€", excuse: "J'avais plus de batterie..." },
@@ -83,7 +76,6 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
   }
 
-  // On double la liste pour l'effet infini
   const shameHTML = [...shameData, ...shameData]
     .map((item) => createShameCard(item))
     .join("");
@@ -131,4 +123,23 @@ document.addEventListener("DOMContentLoaded", () => {
       }, 1000);
     });
   }
+
+  // ============================================
+  // 5. ANIMATION SCROLL (INTERSECTION OBSERVER)
+  // ============================================
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
+        }
+      });
+    },
+    {
+      threshold: 0.1, // Déclenche quand 10% de l'élément est visible
+    }
+  );
+
+  // Observer tous les éléments avec la classe .reveal
+  document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
 });
