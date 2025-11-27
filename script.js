@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const taskIcon = document.getElementById("taskIcon");
   const taskTitle = document.getElementById("taskTitle");
   const taskSub = document.getElementById("taskSub");
+  const demoBtn = document.getElementById("demoBtn");
 
   const habits = {
     run: { title: "Running", icon: "ph-sneaker-move", sub: "30 min / Zone 2" },
@@ -89,6 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.triggerSuccess = function () {
     successScreen.classList.remove("hidden");
+    // demoBtn.classList.remove('animate-pulse-slow'); // Optionnel : stop l'animation après clic
     phoneConfetti({
       particleCount: 80,
       spread: 60,
