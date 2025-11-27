@@ -14,36 +14,8 @@ document.addEventListener("DOMContentLoaded", () => {
     successScreen.classList.add("hidden");
   };
 
-  // 2. LIVE TICKER (Preuve Sociale)
-  const tickerContainer = document.getElementById("tickerContent");
-  const tickerClone = document.getElementById("tickerContentClone");
-  const activities = [
-    { name: "Thomas", action: "a engagé 10€", type: "new" },
-    { name: "Sarah", action: "a validé Séance 3/4", type: "success" },
-    { name: "Lucas", action: "a perdu 5€ (Oups)", type: "fail" },
-    { name: "Emma", action: "a rejoint la Bêta", type: "new" },
-    { name: "David", action: "a sauvé 50€", type: "success" },
-    { name: "Julie", action: "a validé Détox", type: "success" },
-  ];
-  function createTickerItem(item) {
-    let icon =
-      item.type === "success" ? "🔥" : item.type === "fail" ? "💸" : "🔒";
-    let color =
-      item.type === "success"
-        ? "text-brand-green"
-        : item.type === "fail"
-        ? "text-brand-red"
-        : "text-gray-400";
-    return `<div class="flex items-center gap-2 text-sm font-mono opacity-80"><span class="text-xl">${icon}</span><span class="font-bold text-white">${item.name}</span><span class="${color}">${item.action}</span></div>`;
-  }
-  const tickerHTML = activities.map((item) => createTickerItem(item)).join("");
-  if (tickerContainer) {
-    tickerContainer.innerHTML = tickerHTML;
-    tickerClone.innerHTML = tickerHTML;
-  }
-
   // ============================================
-  // 3. CALCULATEUR AMÉLIORÉ (VISUALISATION)
+  // 2. CALCULATEUR AMÉLIORÉ (VISUALISATION)
   // ============================================
   const slider = document.getElementById("betSlider");
   const betDisplay = document.getElementById("betDisplay");
@@ -86,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ============================================
-  // 4. WALL OF SHAME (CAROUSEL)
+  // 3. WALL OF SHAME (CAROUSEL)
   // ============================================
   const shameContainer = document.getElementById("shameContainer");
   const shameData = [
@@ -117,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .join("");
   if (shameContainer) shameContainer.innerHTML = shameHTML;
 
-  // 5. MODAL
+  // 4. MODAL
   const modal = document.getElementById("modal");
   const openBtns = document.querySelectorAll(".open-modal-btn");
   const closeBtn = document.getElementById("closeModalBtn");

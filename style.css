@@ -58,7 +58,7 @@ body { background-color: #050505; color: white; overflow-x: hidden; }
 }
 .animate-scroll {
     display: flex;
-    animation: scroll 40s linear infinite; /* Plus lent pour qu'on puisse lire */
+    animation: scroll 40s linear infinite;
 }
 .animate-scroll:hover { animation-play-state: paused; }
 

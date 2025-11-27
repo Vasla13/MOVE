@@ -127,7 +127,7 @@
         </div>
     </section>
 
-    <!-- CALCULATOR SECTION (Avec Visualisation de perte) -->
+    <!-- CALCULATOR SECTION -->
     <section id="calculator" class="py-24 relative overflow-hidden bg-black">
         <div class="absolute inset-0 bg-brand-green/5"></div>
         <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
@@ -135,7 +135,6 @@
             <h2 class="text-4xl md:text-5xl font-display font-bold mb-12">Combien vaux ta parole ?</h2>
 
             <div class="bg-[#0A0A0A] border border-white/10 rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden">
-                <!-- Background Glow -->
                 <div class="absolute top-0 right-0 w-64 h-64 bg-brand-red/5 rounded-full blur-[80px] pointer-events-none"></div>
 
                 <div class="mb-12">
@@ -156,7 +155,6 @@
                         <p class="text-brand-red text-xs uppercase tracking-wide mb-2">Coût mensuel (si échec)</p>
                         <p class="text-5xl font-display font-bold text-brand-red mb-3" id="lossDisplay">-150€</p>
                         
-                        <!-- NOUVEAU: Visualisation Concrète -->
                         <div id="lossEquivalent" class="text-sm text-gray-400 bg-white/5 p-3 rounded-lg border border-white/5 inline-flex items-center gap-2 animate-pulse-slow">
                             <span class="text-xl">👟</span> 
                             <span>Soit 1 paire de Air Jordan</span>
@@ -167,14 +165,13 @@
         </div>
     </section>
 
-    <!-- NOUVEAU: WALL OF SHAME (Mur des Lamentations) -->
+    <!-- WALL OF SHAME (Mur des Lamentations) -->
     <section id="wall-of-shame" class="py-24 bg-brand-card border-t border-white/5 overflow-hidden">
         <div class="max-w-7xl mx-auto px-6 mb-12 text-center">
             <h2 class="text-3xl font-display font-bold mb-4">Le Mur des Lamentations 🕯️</h2>
             <p class="text-gray-400">Ils avaient des excuses. Ils ont quand même payé.</p>
         </div>
 
-        <!-- Carousel infini -->
         <div class="relative w-full overflow-hidden">
             <div class="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-brand-card to-transparent z-10"></div>
             <div class="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-brand-card to-transparent z-10"></div>
@@ -184,14 +181,6 @@
             </div>
         </div>
     </section>
-
-    <!-- TICKER LIVE MARKET -->
-    <div class="py-3 bg-black border-y border-white/5 overflow-hidden relative">
-        <div class="flex whitespace-nowrap animate-marquee">
-            <div class="flex gap-12 items-center px-4" id="tickerContent"></div>
-            <div class="flex gap-12 items-center px-4" id="tickerContentClone"></div>
-        </div>
-    </div>
 
     <!-- FOOTER -->
     <footer class="bg-black py-12 text-center border-t border-white/10">
