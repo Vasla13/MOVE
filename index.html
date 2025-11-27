@@ -44,12 +44,10 @@
   <body
     class="bg-brand-black text-white antialiased selection:bg-brand-green selection:text-black overflow-x-hidden"
   >
-    <!-- CANVAS GLOBAL (Pour la Bêta / Inscription) -->
     <canvas
       id="global-confetti"
       class="fixed inset-0 pointer-events-none z-[200]"
     ></canvas>
-
     <div
       class="fixed inset-0 pointer-events-none opacity-[0.03] mix-blend-overlay z-[50]"
       style="
@@ -57,7 +55,6 @@
       "
     ></div>
 
-    <!-- BANDEAU AVERTISSEMENT -->
     <div
       id="demo-banner"
       class="fixed top-0 left-0 w-full h-10 bg-brand-green text-black z-[100] flex items-center justify-center text-center px-2 font-bold text-xs md:text-sm uppercase tracking-widest shadow-lg"
@@ -90,7 +87,6 @@
           <a href="#wall-of-shame" class="hover:text-white transition"
             >Le Mur</a
           >
-          <!-- AJOUT DU LIEN RESPONSABILITÉ -->
           <a href="#transparency" class="hover:text-white transition"
             >Responsabilité</a
           >
@@ -169,33 +165,26 @@
           </div>
         </div>
 
-        <!-- PHONE DEMO WRAPPER -->
+        <!-- PHONE DEMO -->
         <div
           class="flex flex-col items-center gap-8 animate-on-load"
           style="animation-delay: 600ms"
         >
-          <!-- LE TÉLÉPHONE ULTRA-REALISTE -->
           <div
             class="relative z-10 lg:h-[720px] flex justify-center items-center"
           >
             <div
               class="phone-mockup w-[340px] h-[680px] bg-[#1a1a1a] flex flex-col relative transition-transform duration-500 hover:scale-[1.01] shadow-[0_30px_60px_-10px_rgba(0,0,0,0.8)]"
             >
-              <!-- CANVAS LOCAL (Pour confettis DANS le téléphone) -->
               <canvas
                 id="phone-confetti"
                 class="absolute inset-0 w-full h-full z-50 pointer-events-none rounded-[40px]"
               ></canvas>
-
-              <!-- DYNAMIC ISLAND / NOTCH -->
               <div class="dynamic-island z-40"></div>
-
-              <!-- ÉCRAN -->
               <div
                 id="phoneScreen"
                 class="h-full w-full flex flex-col p-6 pt-12 relative overflow-hidden transition-colors duration-500 bg-brand-black rounded-[40px]"
               >
-                <!-- BARRE D'ÉTAT (Status Bar) -->
                 <div
                   class="absolute top-3 left-8 text-xs font-medium text-white z-30"
                 >
@@ -204,12 +193,10 @@
                 <div
                   class="absolute top-3 right-8 flex gap-1.5 text-white z-30"
                 >
-                  <i class="ph-fill ph-cell-signal-full text-xs"></i>
-                  <i class="ph-fill ph-wifi-high text-xs"></i>
-                  <i class="ph-fill ph-battery-full text-xs"></i>
+                  <i class="ph-fill ph-cell-signal-full text-xs"></i
+                  ><i class="ph-fill ph-wifi-high text-xs"></i
+                  ><i class="ph-fill ph-battery-full text-xs"></i>
                 </div>
-
-                <!-- HEADER APP -->
                 <div
                   class="flex justify-between items-center mt-4 mb-8 fade-in relative z-10"
                 >
@@ -229,8 +216,6 @@
                     ME
                   </div>
                 </div>
-
-                <!-- TASK CARD (Carte Principale) -->
                 <div
                   id="taskCard"
                   class="bg-gradient-to-b from-[#222] to-[#151515] p-6 rounded-[2rem] border border-white/5 shadow-2xl relative overflow-hidden group transition-all duration-500"
@@ -238,7 +223,6 @@
                   <div
                     class="absolute -top-10 -right-10 w-32 h-32 bg-brand-green/5 blur-3xl rounded-full"
                   ></div>
-
                   <div
                     class="flex justify-between items-start mb-6 relative z-10"
                   >
@@ -255,14 +239,12 @@
                       <span
                         class="text-[10px] text-gray-500 font-bold uppercase mb-1"
                         >En jeu</span
-                      >
-                      <span
+                      ><span
                         class="bg-brand-red/10 text-brand-red text-xs font-bold px-3 py-1.5 rounded-full border border-brand-red/20 shadow-sm"
                         >5,00 €</span
                       >
                     </div>
                   </div>
-
                   <h4
                     class="text-3xl font-display font-bold mb-1 text-white relative z-10"
                     id="taskTitle"
@@ -275,7 +257,6 @@
                   >
                     Cut-off : 23h59
                   </p>
-
                   <button
                     id="demoBtn"
                     onclick="triggerSuccess()"
@@ -284,8 +265,6 @@
                     <span class="relative z-10">SIMULER (CLIC)</span>
                   </button>
                 </div>
-
-                <!-- SUCCESS OVERLAY (Écran Vert) -->
                 <div
                   id="successMessage"
                   class="hidden absolute inset-0 flex flex-col items-center justify-center bg-brand-green z-40 text-black text-center p-6 animation-pop rounded-[40px]"
@@ -310,8 +289,6 @@
                     Recommencer
                   </button>
                 </div>
-
-                <!-- STATS (SNOOZE SUPPRIMÉ) -->
                 <div
                   class="mt-auto flex items-end justify-between fade-in relative z-10 w-full"
                 >
@@ -341,8 +318,6 @@
               </div>
             </div>
           </div>
-
-          <!-- HABIT SWITCHER (Sous le téléphone) -->
           <div
             class="flex gap-4 p-2 bg-white/5 rounded-2xl backdrop-blur-md border border-white/5 shadow-xl"
           >
@@ -375,61 +350,89 @@
       </div>
     </section>
 
-    <!-- SECTION PRINCIPE -->
+    <!-- SECTION PRINCIPE AMÉLIORÉE (PEDAGOGIE & HONNEUR) -->
     <section id="concept" class="py-24 bg-black border-t border-white/5">
       <div class="max-w-7xl mx-auto px-6">
         <div class="text-center mb-20 reveal">
           <h2 class="text-3xl md:text-5xl font-display font-bold mb-6">
-            Comment ça marcherait ?
+            La Mécanique Simple
           </h2>
           <p class="text-gray-400 text-lg max-w-2xl mx-auto">
-            Pas de points, pas de badges, pas de niveaux. Juste ton argent sur
-            la table.
+            Pas de capteurs complexes. Pas de "flicage". Tout repose sur un
+            contrat moral avec toi-même.
           </p>
         </div>
+
         <div class="grid md:grid-cols-3 gap-8">
+          <!-- Etape 1 -->
           <div
-            class="bg-brand-card p-8 rounded-3xl border border-white/5 hover:border-brand-green/30 transition group relative overflow-hidden reveal delay-100"
+            class="bg-brand-card p-10 rounded-3xl border border-white/5 hover:border-brand-green/30 transition group relative overflow-hidden reveal delay-100"
           >
             <div
-              class="w-14 h-14 bg-gray-800 rounded-2xl flex items-center justify-center text-2xl mb-6 text-white group-hover:scale-110 transition duration-500"
+              class="w-16 h-16 bg-gray-800/50 rounded-2xl flex items-center justify-center text-3xl mb-8 text-white group-hover:scale-110 transition duration-500 border border-white/5"
             >
-              <i class="ph-fill ph-target"></i>
+              <i class="ph-fill ph-handshake"></i>
             </div>
-            <h3 class="text-2xl font-bold mb-4 text-white">1. L'Engagement</h3>
+            <h3 class="text-2xl font-bold mb-4 text-white">
+              1. Le Pacte Financier
+            </h3>
             <p class="text-gray-400 leading-relaxed">
-              Choisis ton combat et définis ta "douleur" (ex: 5€). C'est le prix
-              de ton échec.
+              Tu définis ton objectif et ta mise (ex: 5€). C'est un contrat
+              légal entre ton ambition et ta flemme. L'argent est "verrouillé"
+              psychologiquement.
             </p>
           </div>
+
+          <!-- Etape 2 (La Triche expliquée) -->
           <div
-            class="bg-brand-card p-8 rounded-3xl border border-white/5 hover:border-white/20 transition group relative overflow-hidden reveal delay-200"
+            class="bg-brand-card p-10 rounded-3xl border border-white/5 hover:border-white/20 transition group relative overflow-hidden reveal delay-200"
           >
             <div
-              class="w-14 h-14 bg-gray-800 rounded-2xl flex items-center justify-center text-2xl mb-6 text-white group-hover:scale-110 transition duration-500"
+              class="w-16 h-16 bg-gray-800/50 rounded-2xl flex items-center justify-center text-3xl mb-8 text-white group-hover:scale-110 transition duration-500 border border-white/5"
             >
-              <i class="ph-fill ph-clock-countdown"></i>
+              <i class="ph-fill ph-shield-check"></i>
             </div>
-            <h3 class="text-2xl font-bold mb-4 text-white">2. L'Action</h3>
-            <p class="text-gray-400 leading-relaxed">
-              Tu as jusqu'à 23h59 pour valider. Pas de triche, c'est ta
-              conscience contre ton compte.
+            <h3 class="text-2xl font-bold mb-4 text-white">
+              2. Le Code d'Honneur
+            </h3>
+            <p class="text-gray-400 leading-relaxed mb-4">
+              Tu valides d'un simple clic. Pas de GPS intrusif.
             </p>
+            <div
+              class="bg-white/5 p-4 rounded-xl border-l-2 border-brand-green"
+            >
+              <p class="text-xs text-gray-300 italic">
+                <strong>"Et si je mens ?"</strong><br />
+                Tu gardes tes 5€, mais tu perds ton estime de toi. MOVE est pour
+                ceux qui se respectent, pas pour ceux qui trichent au solitaire.
+              </p>
+            </div>
           </div>
+
+          <!-- Etape 3 -->
           <div
-            class="bg-brand-card p-8 rounded-3xl border border-white/5 hover:border-brand-red/40 transition group relative overflow-hidden reveal delay-300"
+            class="bg-brand-card p-10 rounded-3xl border border-white/5 hover:border-brand-red/40 transition group relative overflow-hidden reveal delay-300"
           >
             <div
-              class="w-14 h-14 bg-gray-800 rounded-2xl flex items-center justify-center text-2xl mb-6 text-white group-hover:scale-110 transition duration-500"
+              class="w-16 h-16 bg-gray-800/50 rounded-2xl flex items-center justify-center text-3xl mb-8 text-white group-hover:scale-110 transition duration-500 border border-white/5"
             >
-              <i class="ph-fill ph-wallet"></i>
+              <i class="ph-fill ph-gavel"></i>
             </div>
-            <h3 class="text-2xl font-bold mb-4 text-white">3. La Sentence</h3>
-            <p class="text-gray-400 leading-relaxed">
-              Réussite = 0€.<br />Échec = Débit immédiat.<br /><span
-                class="text-brand-red font-bold"
-                >Non remboursable (Concept).</span
-              >
+            <h3 class="text-2xl font-bold mb-4 text-white">3. Le Verdict</h3>
+            <ul class="space-y-3 text-gray-400 leading-relaxed">
+              <li class="flex items-center gap-3">
+                <i class="ph-fill ph-check-circle text-brand-green"></i>
+                <span>Réussite = <strong>0€</strong> (Gratuit)</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i class="ph-fill ph-x-circle text-brand-red"></i>
+                <span>Échec = <strong>Débit Immédiat</strong></span>
+              </li>
+            </ul>
+            <p
+              class="mt-4 text-xs text-brand-red font-bold bg-brand-red/10 inline-block px-2 py-1 rounded uppercase tracking-wider"
+            >
+              Non remboursable
             </p>
           </div>
         </div>
