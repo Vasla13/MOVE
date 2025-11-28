@@ -74,7 +74,7 @@ Aucune installation npm ou Node nécessaire.
 
 ### Cloner le dépôt
 ```bash
-git clone https://github.com/VOTRE-PSEUDO/move-concept.git
+git clone https://github.com/Vasla13/move-concept.git
 
 Ouvrir le projet
 
